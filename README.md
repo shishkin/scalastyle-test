@@ -6,3 +6,5 @@ This requires overriding `scalastyleConfig`, which is
 This repository demonstrates how to make it work in `Compile` and `Test` configuration in a 
 multi-module project. Based on this suggestion: 
 https://github.com/scalastyle/scalastyle-sbt-plugin/issues/42#issuecomment-143108080.
+
+Run with `sbt scalastyle test:scalastyle`
