@@ -1,8 +1,12 @@
-def styleSettings: Seq[Def.Setting[File]] = {
+def styleSettings: Seq[Def.Setting[_]] = {
   val configFile = Def.setting(root.base / "project/scalastyle_config.xml")
   Seq(
     scalastyleConfig in Compile := configFile.value,
-    scalastyleConfig in scalastyle := configFile.value
+    scalastyleConfig in scalastyle := configFile.value,
+    scalastyle := {
+      (scalastyle in Compile).toTask("").value
+      (scalastyle in Test).toTask("").value
+    }
   )
 }
 
