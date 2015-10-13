@@ -3,9 +3,14 @@ def styleSettings: Seq[Def.Setting[_]] = {
   Seq(
     scalastyleConfig in Compile := configFile.value,
     scalastyleConfig in scalastyle := configFile.value,
-    scalastyle := {
+    compile in Compile := {
+      val result = (compile in Compile).value
       (scalastyle in Compile).toTask("").value
-      (scalastyle in Test).toTask("").value
+      result
+    },
+    test in Test := {
+      val _ = (scalastyle in Test).toTask("").dependsOn(compile in Test).value
+      (test in Test).value
     }
   )
 }
